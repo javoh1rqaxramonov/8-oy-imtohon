@@ -1,23 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FcStackOfPhotos } from "react-icons/fc";
 import { FaHeart } from "react-icons/fa6";
 import { FaSun, FaMoon } from "react-icons/fa";
 import { NavLinks } from "./";
 import Navlinks from "./Navlinks";
+const themeFromLocalStorage = () => {
+  return localStorage.getItem("theme") || "winter";
+};
 
 function Navbar() {
+  const [theme, setTheme] = useState(themeFromLocalStorage());
+  const toggleTheme = () => {
+    const newTheme = theme == "winter" ? "dracula" : "winter";
+    setTheme(newTheme);
+  };
+
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
   return (
     <header className="bg-base-200">
       <div className="navbar aligh-elements">
         <div className="navbar-start">
           <Link to="/" className="hidden md:flex">
-            <FcStackOfPhotos className="w-10 h-10" />
+            <img
+              className="w-10 h-10 "
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXYPNyFGrvP-YqkjoLXlj3no-xP5Cv6M8EDg&s"
+              alt="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXYPNyFGrvP-YqkjoLXlj3no-xP5Cv6M8EDg&s"
+            />
           </Link>
 
           <div className="dropdown md:hidden">
             <div tabIndex={0} role="button">
-              <FcStackOfPhotos className="w-10 h-10" />
+              <img
+                className="w-10 h-10 "
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXYPNyFGrvP-YqkjoLXlj3no-xP5Cv6M8EDg&s"
+                alt="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXYPNyFGrvP-YqkjoLXlj3no-xP5Cv6M8EDg&s"
+              />
             </div>
             <ul
               tabIndex={0}
@@ -43,14 +64,13 @@ function Navbar() {
           </Link>
           <label className="swap swap-rotate">
             {/* this hidden checkbox controls the state */}
-            <input type="checkbox" />
+            <input type="checkbox" onClick={toggleTheme} />
 
             {/* sun icon */}
-            <FaSun  className="swap-on h-6 w-6 mt-[-5px] fill-current" />
-           
+            <FaSun className="swap-on h-6 w-6 mt-[-5px] fill-current" />
 
             {/* moon icon */}
-            <FaMoon  className="swap-off h-6 mt-[-5px] w-6 fill-current" />
+            <FaMoon className="swap-off h-6 mt-[-5px] w-6 fill-current" />
           </label>
         </div>
       </div>

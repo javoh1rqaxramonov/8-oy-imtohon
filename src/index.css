@@ -1,8 +1,10 @@
 @import "tailwindcss";
-@plugin "daisyui";
+@plugin "daisyui" {
+  themes: 'dracula', 'winter';
+}
 
 @layer components { 
   .aligh-elements{
-    @apply max-w-7xl mx-auto px-5;
+    @apply max-w-[1600px] mx-auto px-5;
   }
 }

@@ -2,6 +2,7 @@ import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Home, About, Contact, LikedImages } from "./pages";
 import MainLayout from "./layouts/MainLayout";
+import { action as HomeAction } from "./pages/Home";
 
 function App() {
   const routes = createBrowserRouter([
@@ -11,7 +12,8 @@ function App() {
       children: [
         {
           index : true ,
-          element : <Home/>
+          element : <Home/>,
+          action : HomeAction
         },
         {
           path : '/about' ,
