@@ -1,6 +1,6 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Home, About, Contact, LikedImages } from "./pages";
+import { Home, About, Contact, LikedImages, DownloadImages, ImageInfo } from "./pages";
 import MainLayout from "./layouts/MainLayout";
 import { action as HomeAction } from "./pages/Home";
 
@@ -26,7 +26,15 @@ function App() {
         {
           path : '/likedImages' ,
           element : <LikedImages />
-        }
+        },
+        {
+          path : '/downloadImages' ,
+          element : <DownloadImages />
+        },
+        {
+          path : '/imageInfo' ,
+          element : <ImageInfo />
+        },
       ],
     },
   ]);

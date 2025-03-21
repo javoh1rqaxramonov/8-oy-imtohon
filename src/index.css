@@ -1,10 +1,27 @@
 @import "tailwindcss";
+
 @plugin "daisyui" {
   themes: 'dracula', 'winter';
 }
 
-@layer components { 
-  .aligh-elements{
+@layer components {
+  .aligh-elements {
     @apply max-w-[1600px] mx-auto px-5;
+  }
+
+  .hover-icon {
+    @apply invisible opacity-0 group-hover:opacity-100 group-hover:visible transition-all duration-250
+  }
+
+  html, body, #root {
+    @apply h-full;
+  }
+
+  #root {
+    @apply flex flex-col;
+  }
+
+  main {
+    @apply grow;
   }
 }
