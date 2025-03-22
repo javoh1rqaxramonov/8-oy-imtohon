@@ -4,7 +4,7 @@ import { useFetch } from '../hooks/useFetch'
 
 function ImageInfo() {
     const { id } = useParams()
-    const {data,isPending,error} = useFetch(`https://api.unsplash.com/photos/${id}?client_id=${import.meta.env.VITE_ACCESS_KEY}`);
+    const {data,isPending,error} = useFetch(`https://api.unsplash.com/photos/${id}?client_id=_h1dHQPmq11J6oo8q-WsMqSbg1LFqkm8nS_6l1Xnavs`);
     console.log(data);
     
   return (
