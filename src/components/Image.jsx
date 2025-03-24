@@ -63,8 +63,8 @@ function Image({ image, added }) {
           </p>
         </span>
         <span className="absolute hover-icon h-8 w-8 flex justify-center items-center  cursor-pointer right-2 bottom-2 ">
-          <span onclik={(e)=>downloadImage(e)} >
-            <FaDownload className="text-white" />
+          <span onClick={(e)=>downloadImage(e)} >
+            <FaDownload download className="text-white" />
           </span>
         </span>
       </div>
