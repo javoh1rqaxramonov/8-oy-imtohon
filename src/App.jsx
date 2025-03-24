@@ -17,8 +17,9 @@ import {
 import MainLayout from "./layouts/MainLayout";
 import { action as HomeAction } from "./pages/Home";
 import { ProtectedRoutes } from "./components";
+import { useGlobalContext } from "./hooks/useGlobalContext";
 function App() {
-  const user = false;
+  const {user} = useGlobalContext();
   const routes = createBrowserRouter([
     {
       path: "/",

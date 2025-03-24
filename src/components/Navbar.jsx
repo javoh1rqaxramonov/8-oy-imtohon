@@ -11,7 +11,7 @@ const themeFromLocalStorage = () => {
 };
 
 function Navbar() {
-  const { LikedImages , downloadImages } = useGlobalContext();
+  const { LikedImages, downloadImages, user } = useGlobalContext();
   const [theme, setTheme] = useState(themeFromLocalStorage());
   const toggleTheme = () => {
     const newTheme = theme == "winter" ? "dracula" : "winter";
@@ -83,6 +83,13 @@ function Navbar() {
             {/* moon icon */}
             <FaMoon className="swap-off h-6 mt-[-5px] w-6 fill-current" />
           </label>
+          <div>
+            <div className="avatar">
+              <div className="ring-primary  w-10 rounded-full ring ring-offset-2">
+                <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </header>
