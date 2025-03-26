@@ -2,10 +2,13 @@ import React from "react";
 import { FaRegHeart, FaHeart, FaDownload } from "react-icons/fa6";
 import { useGlobalContext } from "../hooks/useGlobalContext";
 import { Link } from "react-router-dom";
+import { useFirestore } from "../hooks/useFirestore";
 
 function Image({ image, added }) {
   const { links, urls, alt_description, user } = image;
   const { LikedImages, dispatch } = useGlobalContext();
+
+  const {addDocument} = useFirestore();
   const addLikedImage = (image, event) => {
     event.preventDefault();
     // console.log(image);
@@ -14,8 +17,8 @@ function Image({ image, added }) {
     });
 
     if (!alreadyAdded) {
-      dispatch({ type: "LIKE", payload: image });
-    } else {
+      addDocument('likedImages', image.id, image);
+     } else {
       dispatch({ type: "DISLIKE", payload: image.id });
     }
 

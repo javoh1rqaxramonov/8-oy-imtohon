@@ -1,6 +1,7 @@
 import React, { useEffect, useReducer } from "react";
 import { createContext } from "react";
 import { LikedImages } from "../pages";
+import { useCollection } from "../hooks/useCollection";
 
 export const GlobalContext = createContext();
 
@@ -28,7 +29,7 @@ const changeState = (state, action) => {
     case "LIKE":
       return {
         ...state,
-        LikedImages: [...state.LikedImages, payload],
+        LikedImages: payload,
       };
     case "DISLIKE":
       return {
@@ -46,8 +47,16 @@ export function GlobalContextProvider({ children }) {
     LikedImages: [],
     downloadImages: [],
   };
-
+  const {data : likedImages} = useCollection('likedImages');
+  // console.log(data);
+  
   const [state, dispatch] = useReducer(changeState, storedData);
+
+  useEffect(()=>{
+    if(likedImages){
+      dispatch({type: "LIKE", payload: likedImages});
+    }
+  },[likedImages]);
 
   useEffect(() => {
     localStorage.setItem("my-unsplash-data", JSON.stringify(state));

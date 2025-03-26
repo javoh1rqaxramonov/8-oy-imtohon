@@ -16,7 +16,7 @@ const themeFromLocalStorage = () => {
 
 function Navbar() {
   const { LikedImages, downloadImages, user, dispatch } = useGlobalContext();
-  console.log(user);
+  // console.log(user);
   
   const [theme, setTheme] = useState(themeFromLocalStorage());
 
@@ -42,7 +42,7 @@ function Navbar() {
   }, [theme]);
 
   useEffect(() => {
-    console.log("Navbardagi user:", user);
+    // console.log("Navbardagi user:", user);
   }, [user]);
 
   return (
