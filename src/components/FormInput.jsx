@@ -7,10 +7,8 @@ function FormInput({ type, placeholder, name }) {
   const togglePassword = () => setShowPassword(!showPassword);
   return (
     <label className="input input-bordered flex items-center gap-2 w-full input-sm md:input-md">
-      {/* <input type={type} required placeholder={placeholder} name={name} /> */}
       <input
-        type={showPassword ? "text" : type} // `text` yoki `password` ni boshqarish
-        required
+        type={showPassword ? "text" : type} 
         placeholder={placeholder}
         name={name}
       />

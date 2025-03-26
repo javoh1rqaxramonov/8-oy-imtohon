@@ -1,19 +1,55 @@
-import React from "react";
-import { Form } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Form, useActionData } from "react-router-dom";
 import { FormInput } from "../components";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
 import { useRegister } from "../hooks/useRegister";
+import { toast } from "react-toastify";
+
+export const action = async ({ request }) => {
+  const form = await request.formData();
+  const displayName = form.get("displayName");
+  const email = form.get("email");
+  const password = form.get("password");
+  const confirm_password = form.get("confirm_password");
+
+  if (password !== confirm_password) {
+    toast.warn("Password does not match");
+    return null;
+  } else {
+    return {
+      displayName,
+      email,
+      password,
+    };
+  }
+};
 
 function Register() {
-  const { registerWithGoogle } = useRegister();
+  const inputData = useActionData();
+  // console.log(inputData);
+  const { registerWithEmail, registerWithGoogle } = useRegister();
+
+  useEffect(() => {
+    if (inputData) {
+      registerWithEmail(
+        inputData.displayName,
+        inputData.email,
+        inputData.password
+      );
+    }
+  }, [inputData]);
+
   return (
     <div className="flex min-h-screen w-full bg-white">
       <div className="w-[40%] bg-[url('https://picsum.photos/800/900')] bg-cover bg-center hidden md:flex"></div>
-
+      <div className="fixed w-full bottom-0 left-0 top-0 bg-black/30 md:hidden"></div>
       <div className="w-full md:w-[60%] flex flex-col justify-center items-center bg-gray-100 p-6  bg-[url('https://picsum.photos/800/900')] bg-cover bg-center md:bg-none">
-        <Form method="post" className="w-full max-w-96 px-5 md:px-0">
-          <h1 className="text-2xl text-white md:text-black md:text-4xl text-center font-medium mb-5 text-black">
+        <Form
+          method="post"
+          className="w-full max-w-96 px-5 md:px-0 relative z-10"
+        >
+          <h1 className="text-2xl text-white md:text-black md:text-4xl text-center font-medium mb-5 ">
             Register
           </h1>
           <div className="flex flex-col gap-3 md:gap-5">
@@ -21,8 +57,8 @@ function Register() {
             <FormInput placeholder="Email" name="email" type="email" />
             <FormInput placeholder="Password" name="password" type="password" />
             <FormInput
-              placeholder="Confirm Password"
-              name="password"
+              placeholder="confirm_password"
+              name="confirm_password"
               type="password"
             />
           </div>

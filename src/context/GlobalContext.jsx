@@ -41,18 +41,39 @@ const changeState = (state, action) => {
 };
 
 export function GlobalContextProvider({ children }) {
-  const [state, dispatch] = useReducer(changeState, {
-    user:null,
+  const storedData = JSON.parse(localStorage.getItem("my-unsplash-data")) || {
+    user: null,
     LikedImages: [],
     downloadImages: [],
-  });
+  };
+
+  const [state, dispatch] = useReducer(changeState, storedData);
 
   useEffect(() => {
     localStorage.setItem("my-unsplash-data", JSON.stringify(state));
   }, [state]);
+
   return (
     <GlobalContext.Provider value={{ ...state, dispatch }}>
       {children}
     </GlobalContext.Provider>
   );
 }
+
+// export function GlobalContextProvider({ children }) {
+//   const [state, dispatch] = useReducer(changeState, {
+//     user:null,
+//     LikedImages: [],
+//     downloadImages: [],
+//   });
+
+//   useEffect(() => {
+//     localStorage.setItem("my-unsplash-data", JSON.stringify(state));
+//   }, [state]);
+//   return (
+//     <GlobalContext.Provider value={{ ...state, dispatch }}>
+//       {children}
+//     </GlobalContext.Provider>
+//   );
+// } 
+
