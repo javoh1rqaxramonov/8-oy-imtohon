@@ -1,11 +1,10 @@
-import { doc, setDoc, deleteDoc } from "firebase/firestore"; 
+import { doc, deleteDoc, collection, addDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
 import { db } from "../firebase/firebase.Config";
 
 export const useFirestore = () => {
-  
-  const addDocument = (collectionName, id, data) => {
-    setDoc(doc(db, collectionName, id), data)
+  const addDocument = (collectionName,  data) => {
+    addDoc(collection(db, collectionName), data)
       .then(() => {
         toast.success("Document successfully written!");
       })

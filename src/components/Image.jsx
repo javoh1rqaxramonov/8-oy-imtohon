@@ -6,23 +6,20 @@ import { useFirestore } from "../hooks/useFirestore";
 
 function Image({ image, added }) {
   const { links, urls, alt_description, user } = image;
-  const { LikedImages, dispatch } = useGlobalContext();
+  const { LikedImages } = useGlobalContext();
 
-  const {addDocument} = useFirestore();
+  const {addDocument , deleteDocument} = useFirestore();
   const addLikedImage = (image, event) => {
     event.preventDefault();
-    // console.log(image);
-    const alreadyAdded = LikedImages.some((img) => {
+    const alreadyAdded = LikedImages.find((img) => {
       return img.id === image.id;
     });
 
     if (!alreadyAdded) {
-      addDocument('likedImages', image.id, image);
+      addDocument('likedImages', image);
      } else {
-      dispatch({ type: "DISLIKE", payload: image.id });
+      deleteDocument('likedImages', alreadyAdded._id);
     }
-
-    // dispatch({ type: "LIKE", payload: image });
   };
 
   const downloadImage = (event)=>{
@@ -35,7 +32,7 @@ function Image({ image, added }) {
       <div className="relative group">
         {!added && (
           <span
-            onClick={(event) => addLikedImage(image, event)}
+            onClick={(e) => addLikedImage(image, e)}
             className="absolute h-8 w-8 rounded-xl border-1 hover-icon flex justify-center items-center  cursor-pointer right-2 top-2"
           >
             <FaRegHeart className="text-white" />
@@ -43,7 +40,7 @@ function Image({ image, added }) {
         )}
         {added && (
           <span
-            onClick={(event) => addLikedImage(image ,event)}
+            onClick={(e) => addLikedImage(image ,e)}
             className="absolute hover-icon h-8 w-8 rounded-xl border-1  flex justify-center items-center  cursor-pointer right-2 top-2 bg-white"
           >
             <FaHeart className="text-red-500" />

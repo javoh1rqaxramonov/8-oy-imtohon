@@ -2,13 +2,13 @@ import React, { useContext } from "react";
 import { GlobalContext } from "../context/GlobalContext";
 
 function Footer() {
-  const { theme } = useContext(GlobalContext);
+  const { themes } = useContext(GlobalContext);
 
   return (
     <div className="bg-base-200">
       <footer
         className={`footer sm:footer-horizontal align-elements bg-base-200 ${
-          theme === "winter" ? "text-neutral" : "text-white"
+          themes === "winter" ? "text-neutral" : "text-white"
         } items-center p-4`}
       >
         <aside className="grid-flow-col items-center">
