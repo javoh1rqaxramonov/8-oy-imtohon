@@ -81,7 +81,7 @@ function Navbar() {
         </div>
 
         <div className="navbar-end flex gap-5 items-center">
-          <Link to="/downloadedImages">
+          <Link to="/downloadImages">
             <div className="indicator">
               <span className="indicator-item badge badge-sm badge-secondary">
                 {downloadImages.length}
