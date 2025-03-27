@@ -1,10 +1,11 @@
-import { doc, deleteDoc, collection, addDoc } from "firebase/firestore";
+import { doc, setDoc, deleteDoc,collection,addDoc } from "firebase/firestore"; 
 import { toast } from "react-toastify";
 import { db } from "../firebase/firebase.Config";
 
 export const useFirestore = () => {
-  const addDocument = (collectionName,  data) => {
-    addDoc(collection(db, collectionName), data)
+  
+  const addDocument = (collectionName, id, data) => {
+    setDoc(doc(db, collectionName, id), data)
       .then(() => {
         toast.success("Document successfully written!");
       })
@@ -19,7 +20,7 @@ export const useFirestore = () => {
         toast.success("Document successfully deleted!");
       })
       .catch((error) => {
-        toast.error("Error deleting document: " + error.message);
+        toast.error(error.message);
       });
   };
 

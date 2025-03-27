@@ -24,7 +24,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase/firebase.Config";
 import { toast } from "react-toastify";
 function App() {
-  const { user } = useGlobalContext();
+  const { user } = useGlobalContext(  );
   const routes = createBrowserRouter([
     {
       path: "/",

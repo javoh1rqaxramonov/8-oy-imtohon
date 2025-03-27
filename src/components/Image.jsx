@@ -6,19 +6,21 @@ import { useFirestore } from "../hooks/useFirestore";
 
 function Image({ image, added }) {
   const { links, urls, alt_description, user } = image;
-  const { LikedImages } = useGlobalContext();
+  const { LikedImages , user:authUser } = useGlobalContext();
+  
+  // console.log("LikedImages:", LikedImages);
 
   const {addDocument , deleteDocument} = useFirestore();
   const addLikedImage = (image, event) => {
     event.preventDefault();
-    const alreadyAdded = LikedImages.find((img) => {
+    const alreadyAdded = LikedImages.some((img) => {
       return img.id === image.id;
     });
 
     if (!alreadyAdded) {
-      addDocument('likedImages', image);
+      addDocument('likedImages', image.id, {...image,uid:authUser.uid});
      } else {
-      deleteDocument('likedImages', alreadyAdded._id);
+      deleteDocument('likedImages', image.id);
     }
   };
 
