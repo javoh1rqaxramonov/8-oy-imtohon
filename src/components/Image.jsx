@@ -3,6 +3,7 @@ import { FaRegHeart, FaHeart, FaDownload } from "react-icons/fa6";
 import { useGlobalContext } from "../hooks/useGlobalContext";
 import { Link } from "react-router-dom";
 import { useFirestore } from "../hooks/useFirestore";
+// import { ImageInfo } from "../pages/ImageInfo";
 
 function Image({ image, added }) {
   const { links, urls, alt_description, user } = image;
@@ -30,7 +31,7 @@ function Image({ image, added }) {
   }
 
   return (
-    <Link to='/imageInfo'>
+    <Link to={`/imageInfo/${image.id}`}>
       <div className="relative group">
         {!added && (
           <span
